@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    font-family: 'Orbitron', Arial, sans-serif; /* Cute, robotic font */
+    background-color: #0f0f0f; /* Dark, futuristic background */
+}
+
+.metrics-tab {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px 30px;
+    border-radius: 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 800px;
+    font-size: 16px;
+}
+
+.metrics-tab p {
+    margin: 0 25px;
+    color: #333; /* Darker text color for better contrast */
+    font-weight: 500;
+}
+
+.speed-control {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    text-align: center;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #10402f; /* Vibrant purple circle */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.arrow {
+    width: 3px;
+    height: 50px;
+    background-color: white;
+    position: absolute;
+    top: 15px; /* Adjust to center arrow */
+}
+
+.speed-button {
+    padding: 12px 20px;
+    background-color: #10402f; /* Vibrant purple for speed buttons */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.speed-button:hover {
+    background-color: #10402f; /* Darker vibrant purple on hover */
+}
+
+.start-stop-buttons {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.control-button {
+    padding: 15px 25px;
+    background-color: #10402f; /* Vibrant purple for control buttons */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.control-button:hover {
+    background-color: #10402f; /* Darker vibrant purple on hover */
+}
