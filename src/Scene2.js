@@ -1,3 +1,4 @@
+// Scene2.js
 import React, { useRef, useEffect, useState } from 'react';
 import { Canvas, useLoader, useFrame } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -77,7 +78,7 @@ const MetricsTab = ({ distance, calories }) => {
     );
 };
 
-const Scene = () => {
+const Scene2 = () => {
     const [distance, setDistance] = useState(0);
     const [calories, setCalories] = useState(0);
 
@@ -104,4 +105,4 @@ const Scene = () => {
     );
 };
 
-export default Scene;
+export default Scene2;
