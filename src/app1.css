@@ -102,3 +102,6 @@ body {
 .control-button:hover {
     background-color: #10402f; /* Darker vibrant purple on hover */
 }
+canvas {
+    background-color: #87CEEB !important; /* Light blue */
+}
