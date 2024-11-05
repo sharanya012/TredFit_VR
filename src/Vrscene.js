@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
-
+import { Sky } from '@react-three/drei';
 // Model for the Treadmill
 const TreadmillModel = ({ lightIntensity }) => {
     const treadmill = useLoader(GLTFLoader, '/models/scene3.glb');
@@ -65,30 +65,35 @@ const Scene = () => {
     }, []);
 
     return (
-        <Canvas style={{ height: '100vh', backgroundColor: 'black' }} shadows>
-            {/* Ambient light (soft light) */}
-            <ambientLight intensity={0.2} /> {/* Low intensity for soft illumination */}
-            {/* Spotlight (direct light) */}
-            <spotLight
-                position={[0, 5, 10]}
-                intensity={1.5}
-                angle={Math.PI / 4}
-                penumbra={0.3}
-                castShadow
-                shadow-mapSize-width={2048}
-                shadow-mapSize-height={2048}
-                shadow-camera-near={0.5}
-                shadow-camera-far={50}
-                shadow-camera-left={-10}
-                shadow-camera-right={10}
-                shadow-camera-top={10}
-                shadow-camera-bottom={-10}
+        <Canvas
+    style={{ height: '100vh' }}
+    shadows
+    gl={{ clearColor: '#87CEEB' }}
+>
+<Sky
+                distance={450000} // Camera distance
+                sunPosition={[0, 1, 0]} // Sun direction
+                inclination={0.49} // Sun elevation
+                azimuth={0.25} // Sun position in sky
             />
-            {/* Treadmill Model with dynamic lighting */}
-            <TreadmillModel lightIntensity={lightIntensity} />
-            {/* OrbitControls for user interaction */}
-            <OrbitControls />
-        </Canvas>
+
+    <ambientLight intensity={0.3} />
+    <directionalLight
+        position={[5, 10, 5]}
+        intensity={1.5}
+        castShadow
+    />
+    <spotLight
+        position={[0, 5, 10]}
+        intensity={2}
+        angle={Math.PI / 6}
+        penumbra={0.5}
+        castShadow
+    />
+    <TreadmillModel lightIntensity={lightIntensity} />
+    <OrbitControls />
+</Canvas>
+
     );
 };
 
