@@ -1,10 +1,11 @@
+// App.js
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
-import Scene2 from './Scene2'; // Import the Scene2 component
-import './App.css'; // Import the CSS file
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import Scene2 from './Scene2';
+import './App.css';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 
-function WelcomePage({ setUserName, setDuration }) {
+function WelcomePage({ setUserName, setDuration, setSelectedAudio }) {
   const navigate = useNavigate();
 
   const handleStartWorkout = () => {
@@ -25,6 +26,11 @@ function WelcomePage({ setUserName, setDuration }) {
         <option value="30">Intermediate (30 min)</option>
         <option value="45">Advanced (45 min)</option>
       </select>
+      <select onChange={(e) => setSelectedAudio(e.target.value)}>
+        <option value="/gym.mp3">Gym motivation</option>
+        <option value="/mp3file.mp3">josh</option>
+        <option value="/fitness.mp3">fitness</option>
+      </select>
       <button onClick={handleStartWorkout}>Start Your Journey</button>
     </div>
   );
@@ -33,14 +39,15 @@ function WelcomePage({ setUserName, setDuration }) {
 function App() {
   const [userName, setUserName] = useState('');
   const [duration, setDuration] = useState('20');
+  const [selectedAudio, setSelectedAudio] = useState('/fitness.mp3'); // Default song
 
   // Effect to append the VR button
   useEffect(() => {
     const vrButton = VRButton.createButton();
-    document.body.appendChild(vrButton); // Append the VR button to the document body
+    document.body.appendChild(vrButton);
 
     return () => {
-      document.body.removeChild(vrButton); // Cleanup to remove the button when the component unmounts
+      document.body.removeChild(vrButton);
     };
   }, []);
 
@@ -50,9 +57,18 @@ function App() {
         <Routes>
           <Route 
             path="/" 
-            element={<WelcomePage setUserName={setUserName} setDuration={setDuration} />} 
+            element={
+              <WelcomePage 
+                setUserName={setUserName} 
+                setDuration={setDuration} 
+                setSelectedAudio={setSelectedAudio} 
+              />
+            } 
           />
-          <Route path="/Scene2" element={<Scene2 />} />
+          <Route 
+            path="/Scene2" 
+            element={<Scene2 selectedAudio={selectedAudio} />} 
+          />
         </Routes>
       </div>
     </Router>
