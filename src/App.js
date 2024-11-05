@@ -27,9 +27,10 @@ function WelcomePage({ setUserName, setDuration, setSelectedAudio }) {
         <option value="45">Advanced (45 min)</option>
       </select>
       <select onChange={(e) => setSelectedAudio(e.target.value)}>
+      <option >None</option>
         <option value="/gym.mp3">Gym motivation</option>
-        <option value="/mp3file.mp3">josh</option>
-        <option value="/fitness.mp3">fitness</option>
+        <option value="/mp3file.mp3">Josh</option>
+        <option value="/fitness.mp3">Fitness</option>
       </select>
       <button onClick={handleStartWorkout}>Start Your Journey</button>
     </div>
