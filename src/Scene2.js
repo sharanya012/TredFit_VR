@@ -108,7 +108,7 @@ const Scene = () => {
 
     const startActivity = () => {
         setIsActive(true);
-        //setElapsedTime(0); // Reset elapsed time when starting
+        setElapsedTime(0); // Reset elapsed time when starting
     };
 
     const stopActivity = () => {
