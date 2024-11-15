@@ -26,12 +26,7 @@ function WelcomePage({ setUserName, setDuration, setSelectedAudio }) {
         <option value="30">Intermediate (30 min)</option>
         <option value="45">Advanced (45 min)</option>
       </select>
-      <select onChange={(e) => setSelectedAudio(e.target.value)}>
-      <option >None</option>
-        <option value="/gym.mp3">Gym motivation</option>
-        <option value="/mp3file.mp3">Josh</option>
-        <option value="/fitness.mp3">Fitness</option>
-      </select>
+     
       <button onClick={handleStartWorkout}>Start Your Journey</button>
     </div>
   );
@@ -40,7 +35,7 @@ function WelcomePage({ setUserName, setDuration, setSelectedAudio }) {
 function App() {
   const [userName, setUserName] = useState('');
   const [duration, setDuration] = useState('20');
-  const [selectedAudio, setSelectedAudio] = useState('/fitness.mp3'); // Default song
+ //const [selectedAudio, setSelectedAudio] = useState('/fitness.mp3'); // Default song
 
   // Effect to append the VR button
   useEffect(() => {
@@ -62,13 +57,13 @@ function App() {
               <WelcomePage 
                 setUserName={setUserName} 
                 setDuration={setDuration} 
-                setSelectedAudio={setSelectedAudio} 
+               // setSelectedAudio={setSelectedAudio} 
               />
             } 
           />
           <Route 
             path="/Scene2" 
-            element={<Scene2 selectedAudio={selectedAudio} />} 
+            element={<Scene2 />} 
           />
         </Routes>
       </div>

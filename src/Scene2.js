@@ -49,13 +49,18 @@ const Lights = () => (
     </>
 );
 
-const MetricsTab = ({ distance, calories, elapsedTime }) => (
-    <div className="metrics-tab">
-        <p>Kms Traveled: {(distance / 900).toFixed(2)} km</p>
-        <p>Calories Burnt: {calories.toFixed(2)} kcal</p>
-        <p>Elapsed Time: {elapsedTime} min</p>
-    </div>
-);
+const MetricsTab = ({ distance, calories, elapsedTime }) => {
+    const minutes = Math.floor(elapsedTime / 60);
+    const seconds = elapsedTime % 60;
+
+    return (
+        <div className="metrics-tab">
+            <p>Kms Traveled: {(distance / 900).toFixed(2)} km</p>
+            <p>Calories Burnt: {calories.toFixed(2)} kcal</p>
+            <p>Elapsed Time: {minutes} min {seconds} sec</p>
+        </div>
+    );
+};
 
 const SpeedControl = ({ speed, setSpeed }) => {
     const increaseSpeed = () => setSpeed((prev) => Math.min(prev + 0.001, 0.02));
@@ -80,13 +85,13 @@ const StartStopButtons = ({ startActivity, stopActivity }) => (
 );
 
 // Scene Component
-const Scene = ({ selectedAudio }) => {
+const Scene = () => {
     const [distance, setDistance] = useState(0);
     const [calories, setCalories] = useState(0);
     const [speed, setSpeed] = useState(0.005);
     const [elapsedTime, setElapsedTime] = useState(0);
     const [isActive, setIsActive] = useState(false);
-    const [audioLoaded, setAudioLoaded] = useState(false);
+  
     const listenerRef = useRef();
     const soundRef = useRef();
 
@@ -97,24 +102,7 @@ const Scene = ({ selectedAudio }) => {
             return newDistance;
         });
     };
-    useEffect(() => {
-        if (!audioLoaded && selectedAudio) {
-            const listener = new AudioListener();
-            listenerRef.current = listener;
 
-            const audioLoader = new AudioLoader();
-            audioLoader.load(`${selectedAudio}`, (buffer) => {
-                const sound = new Audio(listener);
-                sound.setBuffer(buffer);
-                sound.setLoop(true);
-                sound.setVolume(0.5);
-                soundRef.current = sound;
-                setAudioLoaded(true); // Mark audio as loaded
-            }, undefined, (error) => {
-                console.error('Audio load error:', error);
-            });
-        }
-    }, [selectedAudio, audioLoaded]);
 
     const startActivity = () => {
         setIsActive(true);
@@ -135,10 +123,8 @@ const Scene = ({ selectedAudio }) => {
         if (isActive) {
             timer = setInterval(() => {
                 setElapsedTime((prev) => prev + 1);
-                if ((elapsedTime + 1) % 10 === 0) {
-                    alert('10 minute milestone reached!');
-                }
-            }, 60000);
+                
+            }, 1000);
         }
         return () => clearInterval(timer);
     }, [elapsedTime, isActive]);
